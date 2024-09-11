@@ -1,0 +1,13 @@
+# Instructions to Run the Code
+
+1. Install Dependencies: Ensure you have the required libraries installed. You can use pip to install them:
+pip install numpy pandas scikit-learn tensorflow
+
+2. Prepare the Dataset:
+
+Download the dataset and place it in the same directory as the script.
+Update the path to the dataset in the code if necessary.
+
+3. Run the Code:
+
+Save the code in a Python file (Jupyter notebook)
