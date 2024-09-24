@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>LLM Triangle Model</title>
+    <script src="https://code.jquery.com/jquery-3.6.0.min.js"></script>
+</head>
+<body>
+    <h1>LLM Triangle Model Prototype</h1>
+    <form id="text-form">
+        <label for="text-input">Enter Text:</label><br>
+        <textarea id="text-input" rows="4" cols="50"></textarea><br><br>
+        <button type="submit">Submit</button>
+    </form>
+    <h2>Processed Result:</h2>
+    <div id="result"></div>
+
+    <script>
+        $(document).ready(function() {
+            $('#text-form').on('submit', function(event) {
+                event.preventDefault();
+                var inputText = $('#text-input').val();
+
+                $.ajax({
+                    url: '/process',
+                    method: 'POST',
+                    contentType: 'application/json',
+                    data: JSON.stringify({ text: inputText }),
+                    success: function(response) {
+                        $('#result').text(response.processed_text);
+                    }
+                });
+            });
+        });
+    </script>
+</body>
+</html>
