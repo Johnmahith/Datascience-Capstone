@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Employee Status Predictor</title>
+</head>
+<body>
+    <h1>Employee Status Predictor</h1>
+    <form id="predictionForm">
+        <label>Age: <input type="number" id="age" required></label><br>
+        <label>Length of Service: <input type="number" id="service" required></label><br>
+        <button type="submit">Predict</button>
+    </form>
+    <div id="result"></div>
+
+    <script>
+        document.getElementById('predictionForm').addEventListener('submit', async function(e) {
+            e.preventDefault();
+            const age = document.getElementById('age').value;
+            const service = document.getElementById('service').value;
+
+            const response = await fetch('/predict', {
+                method: 'POST',
+                headers: { 'Content-Type': 'application/json' },
+                body: JSON.stringify({ 
+                    age: parseInt(age), 
+                    length_of_service: parseInt(service),
+                    department_name: 0,  // Replace with appropriate values
+                    job_title: 0,
+                    gender_full: 0,
+                    BUSINESS_UNIT: 0 
+                })
+            });
+
+            const data = await response.json();
+            document.getElementById('result').innerText = 
+                `Prediction: ${data.prediction}, Recommendations: ${data.recommendations.join(', ')}`;
+        });
+    </script>
+</body>
+</html>
